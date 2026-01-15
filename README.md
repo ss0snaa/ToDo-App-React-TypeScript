@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# ToDo App React TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это приложение для управления задачами (To-Do), разработанное с использованием React и TypeScript с использованием Vite в качестве сборщика.
 
-Currently, two official plugins are available:
+## Описание
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ToDo App - это современное веб-приложение для управления списком задач, позволяющее пользователям создавать, просматривать, редактировать и удалять свои задачи. Приложение построено с использованием React и TypeScript, обеспечивая типизированную и масштабируемую архитектуру.
 
-## React Compiler
+## Особенности
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Добавление новых задач
+- Просмотр списка задач
+- Редактирование существующих задач
+- Удаление задач
+- Современный интерфейс пользователя
+- Типизация с помощью TypeScript
+- Быстрая сборка и разработка с Vite
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://reactjs.org/) - библиотека для создания пользовательских интерфейсов
+- [TypeScript](https://www.typescriptlang.org/) - строгая надстройка над JavaScript
+- [Vite](https://vitejs.dev/) - инструмент сборки для современных веб-приложений
+- [ESLint](https://eslint.org/) - инструмент для проверки качества кода
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Установка
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/ss0snaa/ToDo-App-React-TypeScript.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Перейдите в директорию проекта:
+```bash
+cd ToDo-App-React-TypeScript
 ```
+
+3. Установите зависимости:
+```bash
+npm install
+```
+
+## Запуск приложения
+
+Для запуска приложения в режиме разработки:
+```bash
+npm run dev
+```
+
+Приложение будет доступно по адресу [http://localhost:5173](http://localhost:5173)
+
+## Сборка проекта
+
+Для создания продакшн-сборки:
+```bash
+npm run build
+```
+
+## Структура проекта
+
+```
+src/
+├── components/     # Компоненты React
+├── pages/          # Страницы приложения
+├── db/             # Работа с базой данных
+├── assets/         # Статические ресурсы
+└── App.tsx         # Главный компонент приложения
+```
+
+## Вклад в развитие проекта
+
+Если вы хотите внести свой вклад в развитие проекта, пожалуйста, создайте fork репозитория и отправьте pull request с вашими изменениями.
