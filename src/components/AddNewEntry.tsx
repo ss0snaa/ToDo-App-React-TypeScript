@@ -1,5 +1,9 @@
 import {type FormEvent, useState} from "react";
 import {db} from "../db/todoDatabase";
+import { Card, CardContent } from "./ui/Card";
+import Input from "./ui/Input";
+import Textarea from "./ui/Textarea";
+import Button from "./ui/Button";
 
 interface AddNewEntryProps {
   onAddTodo?: () => void;
@@ -34,59 +38,63 @@ const AddNewEntry = ({onAddTodo}: AddNewEntryProps) => {
   }
 
   return (
-    <div className="flex-none bg-stone-700 rounded-xl p-4">
-      <h2 className="text-xl text-center text-yellow-300 mb-4">Добавить новую задачу</h2>
+    <Card>
+      <CardContent className="p-5">
+        <h2 className="text-xl font-bold text-center text-yellow-300 mb-4">
+          Добавить новую задачу
+        </h2>
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title" className="block text-sm font-medium text-yellow-300 mb-1">
-            Заголовок
-          </label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full bg-stone-800 text-yellow-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 border border-stone-600"
-            placeholder="Введите заголовок задачи"
-            required
-          />
-        </div>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="title" className="block text-xs font-semibold text-yellow-300 mb-1.5 uppercase tracking-wide">
+              Заголовок
+            </label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Введите заголовок задачи"
+              required
+            />
+          </div>
 
-        <div>
-          <label htmlFor="description" className="block text-sm font-medium text-yellow-300 mb-1">
-            Описание
-          </label>
-          <textarea
-            id="description"
-            rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full bg-stone-800 text-yellow-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none border border-stone-600"
-            placeholder="Введите описание задачи"
-          ></textarea>
-        </div>
+          <div>
+            <label htmlFor="description" className="block text-xs font-semibold text-yellow-300 mb-1.5 uppercase tracking-wide">
+              Описание
+            </label>
+            <Textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Введите описание задачи"
+              rows={3}
+            />
+          </div>
 
-        <div className="flex space-x-3 pt-2">
-          <button
-            type="submit"
-            className="flex-1 bg-yellow-600 text-stone-900 py-2 px-4 rounded-lg hover:bg-yellow-500
-             disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={loading || title.trim() === ''}
-          >
-            {loading ? 'Добавление...' : 'Добавить'}
-          </button>
-          <button
-            type="button"
-            className="flex-1 bg-stone-700 hover:bg-stone-600 text-yellow-300 py-2 px-4 rounded-lg transition-colors duration-200 border border-stone-500"
-            onClick={clearEntry}
-            disabled={loading}
-          >
-            Очистить
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="grid grid-cols-2 gap-3 pt-1">
+            <Button
+              type="submit"
+              size="md"
+              isLoading={loading}
+              disabled={loading || title.trim() === ''}
+              className="col-span-1"
+            >
+              Добавить
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              size="md"
+              onClick={clearEntry}
+              disabled={loading}
+              className="col-span-1"
+            >
+              Очистить
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
 
