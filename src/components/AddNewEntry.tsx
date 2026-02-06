@@ -12,11 +12,15 @@ interface AddNewEntryProps {
 const AddNewEntry = ({onAddTodo}: AddNewEntryProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [dueDate, setDueDate] = useState<string>("");
   const [loading, setIsLoading] = useState(false);
 
   const clearEntry = () => {
     setTitle("");
     setDescription("");
+    setPriority("medium");
+    setDueDate("");
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -27,7 +31,7 @@ const AddNewEntry = ({onAddTodo}: AddNewEntryProps) => {
     setIsLoading(true);
 
     try {
-      await db.addTodo(title, description);
+      await db.addTodo(title, description, priority, dueDate ? new Date(dueDate) : undefined);
       clearEntry();
       onAddTodo?.(); // Уведомляем родительский компонент о добавлении задачи
     } catch (error) {
@@ -67,8 +71,38 @@ const AddNewEntry = ({onAddTodo}: AddNewEntryProps) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Введите описание задачи"
-              rows={3}
+              rows={2}
             />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="priority" className="block text-xs font-semibold text-yellow-300 mb-1.5 uppercase tracking-wide">
+                Приоритет
+              </label>
+              <select
+                id="priority"
+                value={priority}
+                onChange={(e) => setPriority(e.target.value as "low" | "medium" | "high")}
+                className="w-full bg-stone-800 text-stone-100 rounded-lg border border-stone-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              >
+                <option value="low">Низкий</option>
+                <option value="medium">Средний</option>
+                <option value="high">Высокий</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="dueDate" className="block text-xs font-semibold text-yellow-300 mb-1.5 uppercase tracking-wide">
+                Срок выполнения
+              </label>
+              <Input
+                id="dueDate"
+                type="date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
