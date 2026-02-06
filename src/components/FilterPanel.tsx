@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Card } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
@@ -9,19 +10,32 @@ interface FilterPanelProps {
 }
 
 const FilterPanel = ({ onSearch, onDateFilter, onPriorityFilter }: FilterPanelProps) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
+  const [priorityFilter, setPriorityFilter] = useState('');
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSearch(e.target.value);
+    const term = e.target.value;
+    setSearchTerm(term);
+    onSearch(term);
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onDateFilter(e.target.value);
+    const date = e.target.value;
+    setDateFilter(date);
+    onDateFilter(date);
   };
 
   const handlePriorityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onPriorityFilter(e.target.value);
+    const priority = e.target.value;
+    setPriorityFilter(priority);
+    onPriorityFilter(priority);
   };
 
   const resetFilters = () => {
+    setSearchTerm('');
+    setDateFilter('');
+    setPriorityFilter('');
     onSearch('');
     onDateFilter('');
     onPriorityFilter('');
@@ -37,6 +51,7 @@ const FilterPanel = ({ onSearch, onDateFilter, onPriorityFilter }: FilterPanelPr
           <Input
             type="text"
             placeholder="Поиск задач..."
+            value={searchTerm}
             onChange={handleSearchChange}
           />
         </div>
@@ -47,6 +62,7 @@ const FilterPanel = ({ onSearch, onDateFilter, onPriorityFilter }: FilterPanelPr
           </label>
           <Input
             type="date"
+            value={dateFilter}
             onChange={handleDateChange}
           />
         </div>
@@ -56,13 +72,14 @@ const FilterPanel = ({ onSearch, onDateFilter, onPriorityFilter }: FilterPanelPr
             Приоритет
           </label>
           <select
+            value={priorityFilter}
             onChange={handlePriorityChange}
             className="w-full bg-stone-800 text-stone-100 rounded-lg border border-stone-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
           >
             <option value="">Все</option>
-            <option value="low">Низкий</option>
-            <option value="medium">Средний</option>
             <option value="high">Высокий</option>
+            <option value="medium">Средний</option>
+            <option value="low">Низкий</option>
           </select>
         </div>
 
