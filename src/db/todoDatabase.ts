@@ -5,6 +5,8 @@ export interface TodoItem {
   title: string;
   description?: string;
   completed: boolean;
+  priority: 'low' | 'medium' | 'high';
+  dueDate?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -15,16 +17,18 @@ export class TodoDatabase extends Dexie {
   constructor() {
     super('TodoDatabase');
     this.version(1).stores({
-      todos: '++id, title, description, completed, createdAt, updatedAt',
+      todos: '++id, title, description, completed, priority, dueDate, createdAt, updatedAt',
     });
   }
 
-  async addTodo(title: string, description: string): Promise<number> {
+  async addTodo(title: string, description: string, priority: 'low' | 'medium' | 'high' = 'medium', dueDate?: Date): Promise<number> {
     const now = new Date();
     return this.todos.add({
       title,
       description,
       completed: false,
+      priority,
+      dueDate,
       createdAt: now,
       updatedAt: now,
     });

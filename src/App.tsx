@@ -1,8 +1,11 @@
 import Home from './pages/Home';
+import { TodoProvider } from './store/todoStore';
 
 function App() {
   return (
-    <Home />
+    <TodoProvider>
+      <Home />
+    </TodoProvider>
   );
 }
 
