@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-import { TodoItem } from '../db/todoDatabase';
+import type { TodoItem } from '../db/todoDatabase';
 
 // Типы действий
 type TodoAction =
@@ -78,6 +78,7 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 };
 
 // Хук для использования контекста
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTodoStore = () => {
   const context = useContext(TodoContext);
   if (!context) {
