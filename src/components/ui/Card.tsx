@@ -10,7 +10,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     return (
       <div
         ref={ref}
-        className={`bg-stone-800/50 backdrop-blur-sm rounded-xl border border-stone-700 shadow-lg ${className || ''}`}
+        className={`rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_20px_80px_-40px_rgba(79,70,229,0.65)] backdrop-blur-xl ${className || ''}`}
         {...props}
       >
         {children}
@@ -27,7 +27,7 @@ interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardHeader = ({ children, className, ...props }: CardHeaderProps) => {
   return (
-    <div className={`p-5 ${className || ''}`} {...props}>
+    <div className={`p-6 ${className || ''}`} {...props}>
       {children}
     </div>
   );
@@ -39,7 +39,7 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardContent = ({ children, className, ...props }: CardContentProps) => {
   return (
-    <div className={`p-5 pt-0 ${className || ''}`} {...props}>
+    <div className={`p-6 pt-0 ${className || ''}`} {...props}>
       {children}
     </div>
   );
@@ -51,7 +51,7 @@ interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardFooter = ({ children, className, ...props }: CardFooterProps) => {
   return (
-    <div className={`p-5 pt-0 ${className || ''}`} {...props}>
+    <div className={`p-6 pt-0 ${className || ''}`} {...props}>
       {children}
     </div>
   );

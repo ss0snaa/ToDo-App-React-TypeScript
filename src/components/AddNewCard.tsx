@@ -1,5 +1,5 @@
-import { Plus } from "lucide-react";
 import { Card } from "./ui/Card";
+import { PlusIcon } from "./ui/Icons";
 
 const AddNewCard = () => {
   return (
@@ -13,7 +13,7 @@ const AddNewCard = () => {
     >
       <div className="flex flex-col items-center justify-center">
         <div className="w-12 h-12 rounded-full bg-stone-700 flex items-center justify-center mb-3 transition-colors group-hover:bg-yellow-500/20">
-          <Plus className="w-6 h-6 text-yellow-400 group-hover:text-yellow-300" />
+          <PlusIcon className="w-6 h-6 text-yellow-400 group-hover:text-yellow-300" />
         </div>
         <h3 className="font-semibold text-stone-300 group-hover:text-stone-200">
           Добавить новую задачу

@@ -42,56 +42,28 @@ const FilterPanel = ({ onSearch, onDateFilter, onPriorityFilter }: FilterPanelPr
   };
 
   return (
-    <Card className="p-4 mb-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        <div>
-          <label className="block text-xs font-semibold text-stone-400 mb-1.5 uppercase tracking-wide">
-            Поиск
-          </label>
-          <Input
-            type="text"
-            placeholder="Поиск задач..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </div>
+    <Card className="p-4">
+      <h3 className="mb-3 text-sm font-semibold text-white">Фильтры</h3>
+      <div className="space-y-3">
+        <Input type="text" placeholder="Поиск по задачам..." value={searchTerm} onChange={handleSearchChange} />
 
-        <div>
-          <label className="block text-xs font-semibold text-stone-400 mb-1.5 uppercase tracking-wide">
-            По дате
-          </label>
-          <Input
-            type="date"
-            value={dateFilter}
-            onChange={handleDateChange}
-          />
-        </div>
-
-        <div>
-          <label className="block text-xs font-semibold text-stone-400 mb-1.5 uppercase tracking-wide">
-            Приоритет
-          </label>
+        <div className="grid grid-cols-2 gap-3">
+          <Input type="date" value={dateFilter} onChange={handleDateChange} />
           <select
             value={priorityFilter}
             onChange={handlePriorityChange}
-            className="w-full bg-stone-800 text-stone-100 rounded-lg border border-stone-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="h-11 w-full rounded-xl border border-white/10 bg-slate-900/70 px-3 text-sm text-slate-100 outline-none transition-all focus:border-cyan-300/60 focus:ring-4 focus:ring-cyan-400/20"
           >
-            <option value="">Все</option>
+            <option value="">Любой приоритет</option>
             <option value="high">Высокий</option>
             <option value="medium">Средний</option>
             <option value="low">Низкий</option>
           </select>
         </div>
 
-        <div className="flex items-end">
-          <Button
-            variant="ghost"
-            onClick={resetFilters}
-            className="w-full"
-          >
-            Сбросить
-          </Button>
-        </div>
+        <Button variant="ghost" onClick={resetFilters} className="w-full border border-white/10">
+          Сбросить фильтры
+        </Button>
       </div>
     </Card>
   );

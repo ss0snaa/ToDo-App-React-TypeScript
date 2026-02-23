@@ -9,43 +9,50 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', isLoading, children, className, ...props }, ref) => {
-    const baseClasses = 'font-medium rounded-lg inline-flex items-center justify-center transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-stone-900';
-    
+    const baseClasses =
+      'inline-flex items-center justify-center rounded-xl font-medium transition-all duration-200 focus:outline-none focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60';
+
     const variants = {
-      primary: 'bg-gradient-to-r from-yellow-500 to-amber-500 text-stone-900 hover:from-yellow-400 hover:to-amber-400 focus:ring-yellow-500 shadow-md hover:shadow-lg',
-      secondary: 'bg-stone-700 text-yellow-300 hover:bg-stone-600 focus:ring-stone-500 border border-stone-600',
-      ghost: 'text-stone-200 hover:bg-stone-700/50 focus:ring-stone-500',
-      danger: 'bg-red-500/20 text-red-400 hover:bg-red-500/30 focus:ring-red-500 border border-red-500/30'
+      primary:
+        'bg-gradient-to-r from-cyan-300 via-sky-300 to-indigo-300 text-slate-900 shadow-[0_12px_30px_-12px_rgba(56,189,248,0.8)] hover:brightness-105 focus:ring-cyan-400/40',
+      secondary:
+        'border border-white/10 bg-white/5 text-slate-100 hover:bg-white/10 focus:ring-slate-300/20',
+      ghost:
+        'text-slate-300 hover:bg-white/10 hover:text-white focus:ring-slate-300/20',
+      danger:
+        'border border-rose-300/30 bg-rose-500/15 text-rose-200 hover:bg-rose-500/25 focus:ring-rose-400/30',
     };
-    
+
     const sizes = {
-      sm: 'text-xs px-3 py-1.5',
-      md: 'text-sm px-4 py-2',
-      lg: 'text-base px-6 py-3'
+      sm: 'px-3 py-1.5 text-xs',
+      md: 'px-4 py-2.5 text-sm',
+      lg: 'px-6 py-3 text-base',
     };
-    
-    const loadingState = isLoading 
-      ? 'opacity-70 cursor-not-allowed' 
-      : '';
-      
-    const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${loadingState} ${className || ''}`;
+
+    const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className || ''}`;
 
     return (
-      <button
-        ref={ref}
-        className={classes}
-        disabled={isLoading || props.disabled}
-        {...props}
-      >
+      <button ref={ref} className={classes} disabled={isLoading || props.disabled} {...props}>
         {isLoading ? (
-          <span className="flex items-center">
-            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          <span className="flex items-center gap-2">
+            <svg
+              className="h-4 w-4 animate-spin"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 0 1 8-8V0C5.37 0 0 5.37 0 12h4Zm2 5.29A7.96 7.96 0 0 1 4 12H0c0 3.04 1.14 5.82 3 7.94l3-2.65Z"
+              />
             </svg>
-            Загрузка...
+            Сохраняем...
           </span>
-        ) : children}
+        ) : (
+          children
+        )}
       </button>
     );
   }
